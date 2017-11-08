@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+#*.*encoding=utf-8*.*
+
+#  CONTSTANTS
+
+EXIT_OK=0
+EXIT_BAD=66
+
+if [[ ! $1 ]];
+	then
+		echo
+		echo "createx help"
+		echo 
+		exit $EXIT_BAD
+fi
+
+case "$1" in
+	help)
+		echo
+		echo -e "createx $BOLD[archivo]$NC"
+		echo
+		echo -e "crea un archivo regular con permisos de ejecución"
+		echo -e "y algo de$BOLD código$NC que siempre necesito"
+		echo
+		exit $EXIT_OK
+		;;
+	*)
+		touch "$1"
+		chmod +x "$1"
+		echo "#!/usr/bin/env bash" >> "$1"
+		echo "#*.*encoding=utf-8*.*" >> "$1"
+		echo "#  CONTSTANTS" >> "$1"
+		echo "" >> "$1"
+		echo "EXIT_OK=0" >> "$1"
+		echo "EXIT_BAD=66" >> "$1"
+		echo "" >> "$1"
+		echo "BOLD=\"\033[1m\"" >> "$1"
+		echo "NC=\"\033[0m\"" >> "$1"
+		echo "RED=\"\033[31m\"" >> "$1"
+		echo "" >> "$1"
+
+		echo "echo -e \"esto es $1\"" >> "$1"
+		exit $EXIT_OK
+		;;
+esac
